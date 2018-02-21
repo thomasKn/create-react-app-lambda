@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
 import Test from './test';
 import Client from 'shopify-buy';
-import './app.css';
+import './App.css';
 
 const client = Client.buildClient({
   domain: 'sas-iskn.myshopify.com',
