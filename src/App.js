@@ -90,7 +90,7 @@ class App extends Component {
           </div>
         </header>
         <div style={{ textAlign: 'center' }}>
-          <Link to="/test"><h1>Click to test the router</h1></Link>
+          <Link to="/test"><h1>Click to test the router brow</h1></Link>
         </div>
         <Products
           products={this.state.products}
