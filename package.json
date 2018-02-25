@@ -5,6 +5,8 @@
   "dependencies": {
     "dotenv": "^5.0.0",
     "netlify-lambda": "^0.1.0",
+    "pusher": "^1.5.1",
+    "pusher-js": "^4.2.2",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-router-dom": "^4.2.2",
