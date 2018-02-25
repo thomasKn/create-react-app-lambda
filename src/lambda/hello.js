@@ -1,22 +1,26 @@
 import Pusher from 'pusher';
 import dotenv from 'dotenv/config';
+import faker from 'faker';
+import Chatkit from 'pusher-chatkit-server';
 
 export function handler(event, context, callback) {
-  const pusher = new Pusher({
-    appId: process.env.PUSHER_APP_ID,
-    key: process.env.PUSHER_APP_KEY,
-    secret: process.env.PUSHER_APP_SECRET,
-    cluster: process.env.PUSHER_APP_CLUSTER,
-    encrypted: true
-  });
+  const userName = faker.name.findName();
+  const userId = faker.random.uuid();
+  const userAvatar = faker.image.avatar();
 
-  pusher.trigger('my-channel', 'my-event', {
-    "message": "hello world from pusher"
-  });
-
-  console.log(event)
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify({msg: "Hello, World!"})
+  const chatkit = new Chatkit({
+    instanceLocator: process.env.PUSHER_INSTANCE_LOCATOR,
+    key: process.env.PUSHER_KEY,
   })
+
+  chatkit.createUser(userId, userName, userAvatar)
+  .then((res) => {
+    console.log('User created successfully');
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({userId: res.id})
+    })
+  }).catch((err) => {
+    console.log(err);
+  });
 }
