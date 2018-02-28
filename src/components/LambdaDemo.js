@@ -1,4 +1,12 @@
 import React, {Component} from 'react';
+import Lottie from 'react-lottie';
+import * as animationData from './../bike.json';
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData,
+};
 
 class LambdaDemo extends Component {
   constructor(props) {
@@ -12,7 +20,9 @@ class LambdaDemo extends Component {
     this.setState({loading: true});
     fetch('/.netlify/functions/hello')
       .then(response => response.json())
-      .then(json => this.setState({loading: false, msg: json.msg}));
+      .then(json => {
+        this.setState({loading: false, msg: json.userId})
+      });
   }
 
   render() {
@@ -21,6 +31,12 @@ class LambdaDemo extends Component {
     return <p>
       <button onClick={this.handleClick}>{loading ? 'Loading...' : 'Call Lambda'}</button><br/>
       <span>{msg}</span>
+      <Lottie
+        options={defaultOptions}
+        speed={0.5}
+        height={400}
+        width={400}
+      />
     </p>
   }
 }
